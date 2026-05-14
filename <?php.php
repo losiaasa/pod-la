@@ -1,6 +1,6 @@
 <?php
-// Simple PHP Server Entry Point
-// This script runs without errors and serves as a basic starting point for a server.
+// Titik Masuk Server PHP Sederhana
+// Script ini berjalan tanpa error dan berfungsi sebagai dasar server.
 
 header('Content-Type: application/json');
 
