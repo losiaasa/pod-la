@@ -1,0 +1,6 @@
+services:
+  rui:
+    image: rui
+    build:
+      context: .
+      dockerfile: ./Dockerfile
