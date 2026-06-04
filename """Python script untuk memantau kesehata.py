@@ -9,10 +9,21 @@ Gunakan host: localhost, port: 3306, user: root.
 import time
 from collections import deque
 
-import mysql.connector
-from mysql.connector import Error
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
+try:
+    import mysql.connector
+    from mysql.connector import Error
+except ImportError:
+    print("Warning: mysql-connector-python not installed. Install with: pip install mysql-connector-python")
+    mysql = None
+    Error = Exception
+
+try:
+    import matplotlib.pyplot as plt
+    from matplotlib.animation import FuncAnimation
+except ImportError:
+    print("Warning: matplotlib not installed. Install with: pip install matplotlib")
+    plt = None
+    FuncAnimation = None
 
 # Konfigurasi koneksi database
 DB_CONFIG = {
