@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio & Store | Exclusive</title>
+    
+    <!-- Link Font Modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #a855f7;
+            --dark-bg: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-light: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- Navigasi Modern --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+            opacity: 0.8;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--primary-color);
+        }
+
+        /* --- Kontainer Utama --- */
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        /* Animasi Halaman */
+        .page {
+            display: none;
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Halaman Tentang Saya --- */
+        .hero-section {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .profile-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            object-fit: cover;
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .hero-section p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: #94a3b8;
+        }
+
+        /* --- Grid Produk & Projek --- */
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .price-tag {
+            display: inline-block;
+            background: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* --- Tombol & Fitur --- */
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+            filter: brightness(1.1);
+        }
+
+        /* --- Footer (Bagian Hubungi Kami) --- */
+        footer {
+            margin-top: 100px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .contact-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            text-decoration: none;
+            color: var(--text-light);
+            background: var(--card-bg);
+            padding: 20px 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
+        }
+
+        .contact-item:hover {
+            background: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .contact-item i {
+            display: block;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 5px;
+        }
+
+        /* --- Modal Payment --- */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #1e293b;
+            padding: 40px;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: white;
+            border-radius: 8px;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px; top: 20px;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">CREATIVE.CO</div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="showPage('about')">Beranda</a></li>
+            <li><a href="#" onclick="showPage('store')">Toko Kami</a></li>
+            <li><a href="#" onclick="showPage('works')">Portofolio</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <!-- HALAMAN: TENTANG SAYA -->
+        <section id="about" class="page active">
+            <div class="hero-section">
+                <div class="profile-wrapper">
+                    <img src="https://via.placeholder.com/180" alt="Me" class="profile-img">
+                </div>
+                <h1>Kreativitas Tanpa Batas</h1>
+                <p>Membantu Anda mewujudkan ide-ide digital melalui layanan desain, pengembangan web, dan solusi bisnis kreatif lainnya.</p>
+            </div>
+        </section>
+
+        <!-- HALAMAN: TOKO (PRODUK) -->
+        <section id="store" class="page">
+            <h2 class="section-title">Layanan & Paket</h2>
+            <div class="grid">
+                <div class="glass-card">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500" class="card-img">
+                    <div class="card-content">
+                        <span class="price-tag">Rp 250.000</span>
+                        <h3>Branding Design</h3>
+                        <p class="detail">Paket identitas visual lengkap untuk bisnis baru Anda termasuk logo dan kartu nama.</p>
+                        <button class="btn btn-primary" onclick="openPayment('Branding Design', 250000)">Pesan Sekarang</button>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500" class="card-img">
+                    <div class="card-content">
+                        <span class="price-tag">Rp 750.000</span>
+                        <h3>Web Development</h3>
+                        <p class="detail">Website landing page profesional dengan desain modern dan responsif untuk semua perangkat.</p>
+                        <button class="btn btn-primary" onclick="openPayment('Web Development', 750000)">Pesan Sekarang</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HALAMAN: PROJEK -->
+        <section id="works" class="page">
+            <h2 class="section-title">Hasil Karya</h2>
+            <div class="grid">
+                <div class="glass-card">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500" class="card-img">
+                    <div class="card-content">
+                        <h3>Dashboard Analytics</h3>
+                        <p class="detail">Membangun sistem pemantauan data real-time untuk perusahaan logistik.</p>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500" class="card-img">
+                    <div class="card-content">
+                        <h3>Mobile App Design</h3>
+                        <p class="detail">Desain antarmuka aplikasi kesehatan yang telah digunakan oleh 10rb+ pengguna.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- BAGIAN HUBUNGI KAMI (FOOTER) -->
+    <footer>
+        <h2>Tertarik Bekerja Sama?</h2>
+        <p>Hubungi saya kapan saja untuk konsultasi gratis.</p>
+        
+        <div class="contact-grid">
+            <!-- Link WhatsApp Otomatis -->
+            <a href="https://wa.me/6281234567890" target="_blank" class="contact-item">
+                <i>WhatsApp Fast Respon</i>
+                <strong>+62 812-3456-7890</strong>
+            </a>
+            
+            <!-- Link Email Otomatis -->
+            <a href="mailto:halo@emailkamu.com" class="contact-item">
+                <i>Email Resmi</i>
+                <strong>halo@emailkamu.com</strong>
+            </a>
+        </div>
+        
+        <p style="margin-top: 50px; opacity: 0.5; font-size: 0.8rem;">&copy; 2024 Creative Digital. All Rights Reserved.</p>
+    </footer>
+
+    <!-- MODAL PAYMENT -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closePayment()">&times;</span>
+            <h3>Konfirmasi Pemesanan</h3>
+            <p id="p-info" style="margin: 15px 0; color: var(--primary-color); font-weight: 600;"></p>
+            
+            <form onsubmit="confirmOrder(event)">
+                <label>Nama Lengkap</label>
+                <input type="text" placeholder="Nama Anda" required>
+                
+                <label>Pilih Metode Bayar</label>
+                <select required>
+                    <option value="qris">QRIS (Gopay/Dana/OVO)</option>
+                    <option value="bank">Transfer Bank BCA</option>
+                </select>
+                
+                <button type="submit" class="btn btn-primary">Konfirmasi & Bayar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Navigasi
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // Modal Payment
+        function openPayment(name, price) {
+            document.getElementById('p-info').innerText = name + " - Rp " + price.toLocaleString('id-ID');
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        function closePayment() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        function confirmOrder(e) {
+            e.preventDefault();
+            alert('Pesanan Diterima! Silakan cek WhatsApp Anda untuk detail pembayaran selanjutnya.');
+            closePayment();
+        }
+
+        // Tutup modal jika klik luar kotak
+        window.onclick = function(e) {
+            if(e.target == document.getElementById('paymentModal')) closePayment();
+        }
+    </script>
+</body>
+</html>

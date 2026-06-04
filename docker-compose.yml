@@ -1,37 +1,50 @@
-version: "3.9"
-
 services:
+  rui:
+    image: rui-web:latest
+    container_name: rui-rui-1
+    restart: always
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DB_HOST=rui-db-1
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=rahasia123
+      - DB_NAME=harapan_dp
+    networks:
+      - rui_default
+    entrypoint: >
+      sh -c "pip install pandas mysql-connector-python --break-system-packages && python /app/email_env/lib/python3.13/site-packages/mysql/ai/genai/vector_store.py"
+
   mysql:
     image: mysql:8.0
+    container_name: rui-db-1
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=rahasia123
+      - MYSQL_DATABASE=harapan_dp
     ports:
       - "3306:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=rootpassword
-      - MYSQL_DATABASE=mydb
-      - MYSQL_USER=appuser
-      - MYSQL_PASSWORD=appassword
-    volumes:
-      - mysql_data:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
+    networks:
+      - rui_default
 
-  server-go-baru:
-    build:
-      context: ./folder-go-baru
-      dockerfile: Dockerfile
+  rui-web:
+    image: rui-web:latest
+    container_name: rui-web-1
+    restart: always
     ports:
-      - "8081:8081"
-    environment:
-      - DB_HOST=mysql
-      - DB_USER=root
-      - DB_PASSWORD=rootpassword
-      - DB_NAME=mydb
-    depends_on:
-      mysql:
-        condition: service_healthy
+      - "3000:3000"
+    networks:
+      - rui_default
 
-volumes:
-  mysql_data:
+  go-server:
+    image: go-server-go-server:latest
+    container_name: go-server-go-server-1
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - rui_default
+
+networks:
+  rui_default:
+    driver: bridge

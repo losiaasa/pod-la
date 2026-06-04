@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Tentang Saya & Toko</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">MyWebsite</div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="showPage('tentang-saya')">Tentang Saya</a></li>
+            <li><a href="#" onclick="showPage('produk')">Produk & Paket</a></li>
+            <li><a href="#" onclick="showPage('projek')">Projek Saya</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+
+        <section id="tentang-saya" class="page active">
+            <div class="profile-card">
+                <img src="https://via.placeholder.com/150" alt="Foto Profil" class="profile-img">
+                <h2>Halo, Selamat Datang!</h2>
+                <p class="bio">Saya adalah seorang kreator dan pelaku bisnis. Di website ini, Anda bisa melihat projek yang pernah saya kerjakan dan membeli paket produk/jasa yang saya tawarkan.</p>
+            </div>
+        </section>
+
+        <section id="produk" class="page">
+            <h2 class="section-title">Pilihan Produk & Paket</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x200" alt="Produk Standar" class="card-img">
+                    <div class="card-body">
+                        <h3>Paket Standar</h3>
+                        <p class="price">Rp 150.000</p>
+                        <p class="detail">Paket basic dengan layanan standar cocok untuk pemula.</p>
+                        <button class="btn-buy" onclick="openPayment('Paket Standar', 150000)">Beli Sekarang</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x200" alt="Produk Premium" class="card-img">
+                    <div class="card-body">
+                        <h3>Paket Premium</h3>
+                        <p class="price">Rp 350.000</p>
+                        <p class="detail">Paket lengkap dengan dukungan 24/7 dan kustomisasi penuh.</p>
+                        <button class="btn-buy" onclick="openPayment('Paket Premium', 350000)">Beli Sekarang</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projek" class="page">
+            <h2 class="section-title">Projek Yang Pernah Dibuat</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x200" alt="Projek E-commerce" class="card-img">
+                    <div class="card-body">
+                        <h3>E-Commerce Website</h3>
+                        <p class="detail">Membangun toko online berbasis web dengan sistem kelola stok otomatis.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x200" alt="Projek Aplikasi Kasir" class="card-img">
+                    <div class="card-body">
+                        <h3>Aplikasi Kasir Digital</h3>
+                        <p class="detail">Sistem pencatatan keuangan untuk UMKM agar lebih rapi dan terstruktur.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="payment-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closePayment()">&times;</span>
+                <h3>Formulir Pembayaran</h3>
+                <p id="modal-product-name" style="font-weight: bold; margin-bottom: 10px;"></p>
+                <form id="payment-form" onsubmit="processPayment(event)">
+                    <div class="form-group">
+                        <label>Nama Lengkap:</label>
+                        <input type="text" required placeholder="Masukkan nama Anda">
+                    </div>
+                    <div class="form-group">
+                        <label>Metode Pembayaran:</label>
+                        <select required>
+                            <option value="transfer">Transfer Bank (BCA/Mandiri)</option>
+                            <option value="ewallet">E-Wallet (Dana/Ovo/Gopay)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-pay">Konfirmasi Pembayaran</button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

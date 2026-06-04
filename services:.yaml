@@ -1,0 +1,36 @@
+services:
+  # 1. Server Go Utama
+  go-server:
+    image: go-server-go-server:latest
+    container_name: go-server-main
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - rui_default
+
+  # 2. Database MySQL
+  rui-db:
+    image: mysql:8.0
+    container_name: rui-db-1
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
+    networks:
+      - rui_default
+
+  # 3. Aplikasi Web Rui
+  rui-web:
+    image: rui-web:latest
+    container_name: rui-web-1
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - rui_default
+
+networks:
+  rui_default:
+    driver: bridge
